@@ -1,7 +1,7 @@
 package domain;
 
-import static Message.ErrorMessage.TRY_COUNT_FORMAT_ERROR_MESSAGE;
-import static Message.ErrorMessage.TRY_COUNT_NEGATIVE_ERROR_MESSAGE;
+import static message.ErrorMessage.TRY_COUNT_FORMAT_ERROR_MESSAGE;
+import static message.ErrorMessage.TRY_COUNT_NEGATIVE_ERROR_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;

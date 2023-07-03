@@ -1,6 +1,6 @@
 package domain;
 
-import static Message.ErrorMessage.CAR_NAME_LENGTH_ERROR_MESSAGE;
+import static message.ErrorMessage.CAR_NAME_LENGTH_ERROR_MESSAGE;
 
 public class Name {
 

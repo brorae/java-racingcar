@@ -1,7 +1,7 @@
 package view;
 
-import static Message.GameMessage.FINAL_RESULT_MESSAGE;
-import static Message.GameMessage.GAME_RESULT_MESSAGE;
+import static message.GameMessage.FINAL_RESULT_MESSAGE;
+import static message.GameMessage.GAME_RESULT_MESSAGE;
 
 import java.util.List;
 import java.util.Map;

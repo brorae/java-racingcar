@@ -1,6 +1,6 @@
 package domain;
 
-import static Message.ErrorMessage.WINNER_NOT_EXIST_ERROR_MESSAGE;
+import static message.ErrorMessage.WINNER_NOT_EXIST_ERROR_MESSAGE;
 
 import java.util.ArrayList;
 import java.util.Collections;

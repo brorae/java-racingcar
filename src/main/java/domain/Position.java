@@ -1,6 +1,6 @@
 package domain;
 
-import static Message.ErrorMessage.POSITION_NEGATIVE_ERROR_MESSAGE;
+import static message.ErrorMessage.POSITION_NEGATIVE_ERROR_MESSAGE;
 
 import java.util.Objects;
 

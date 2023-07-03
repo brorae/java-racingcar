@@ -1,7 +1,7 @@
 package domain;
 
-import static Message.ErrorMessage.TRY_COUNT_FORMAT_ERROR_MESSAGE;
-import static Message.ErrorMessage.TRY_COUNT_NEGATIVE_ERROR_MESSAGE;
+import static message.ErrorMessage.TRY_COUNT_FORMAT_ERROR_MESSAGE;
+import static message.ErrorMessage.TRY_COUNT_NEGATIVE_ERROR_MESSAGE;
 
 public class TryCount {
 

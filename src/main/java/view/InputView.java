@@ -1,7 +1,7 @@
 package view;
 
-import static Message.GameMessage.CAR_NAMES_MESSAGE;
-import static Message.GameMessage.TRY_COUNT_MESSAGE;
+import static message.GameMessage.CAR_NAMES_MESSAGE;
+import static message.GameMessage.TRY_COUNT_MESSAGE;
 
 import java.io.BufferedReader;
 import java.io.IOException;

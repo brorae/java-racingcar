@@ -1,6 +1,6 @@
 package controller;
 
-import static Message.ErrorMessage.GAME_ERROR_MESSAGE;
+import static message.ErrorMessage.GAME_ERROR_MESSAGE;
 
 import domain.Car;
 import domain.Cars;
