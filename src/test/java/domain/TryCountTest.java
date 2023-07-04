@@ -56,7 +56,7 @@ class TryCountTest {
         TryCount tryCount = TryCount.from("2");
 
         TryCount oneTryCount = tryCount.decrease();
-        TryCount zeroTryCount = tryCount.decrease();
+        TryCount zeroTryCount = oneTryCount.decrease();
 
         assertAll(
                 () -> assertThat(oneTryCount.isZero()).isFalse(),
