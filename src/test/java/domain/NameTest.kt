@@ -1,39 +1,31 @@
-package domain;
+package domain
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import message.ErrorMessage.CAR_NAME_LENGTH_ERROR_MESSAGE
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.junit.jupiter.api.Assertions.assertAll
+import org.junit.jupiter.api.function.Executable
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
-import message.ErrorMessage;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
-class NameTest {
+internal class NameTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"bro", "brora", "a"})
-    void 이름을_생성한다(String value) {
-        var name = new Name(value);
+    @ValueSource(strings = ["bro", "brora", "a"])
+    fun `이름을 생성한다`(value: String) {
+        val name = Name(value)
 
         assertAll(
-                () -> assertThat(name).isInstanceOf(Name.class),
-                () -> assertThat(name.getValue()).isEqualTo(value)
-        );
+            Executable { assertThat(name).isInstanceOf(Name::class.java) },
+            Executable { assertThat(name.value).isEqualTo(value) }
+        )
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"brorae", "broraee", "aaaaaaa"})
-    void 이름을_생성할_때_길이가_5보다_크면_예외가_발생한다() {
-        assertThatThrownBy(() -> new Name("brorae"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.CAR_NAME_LENGTH_ERROR_MESSAGE.getValue());
-    }
-
-    @Test
-    void 이름을_생성할_때_null이_들어오면_예외가_발생한다() {
-        assertThatThrownBy(() -> new Name(null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.CAR_NAME_LENGTH_ERROR_MESSAGE.getValue());
+    @ValueSource(strings = ["brorae", "broraee", "aaaaaaa"])
+    fun `이름을 생성할 때 길이가 5보다 크면 예외가 발생한다`() {
+        assertThatThrownBy { Name("brorae") }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessage(CAR_NAME_LENGTH_ERROR_MESSAGE.value)
     }
 }

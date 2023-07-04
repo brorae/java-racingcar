@@ -1,28 +1,28 @@
-package domain;
+package domain
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import domain.Position.Companion.create
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.function.Executable
 
-import org.junit.jupiter.api.Test;
-
-class PositionTest {
+internal class PositionTest {
 
     @Test
-    void 위치를_생성한다() {
-        var position = Position.create();
-
+    fun `위치를 생성한다`() {
+        val position = create()
         assertAll(
-                () -> assertThat(position).isInstanceOf(Position.class),
-                () -> assertThat(position.getValue()).isEqualTo(0)
-        );
+            Executable { assertThat(position).isInstanceOf(Position::class.java) },
+            Executable { assertThat(position.value).isEqualTo(0) }
+        )
     }
 
     @Test
-    void 위치가_증가한다() {
-        Position position = Position.create();
+    fun `위치가 증가한다`() {
+        val position = create()
 
-        Position increasingPosition = position.increase();
+        val increasingPosition = position.increase()
 
-        assertThat(increasingPosition.getValue()).isEqualTo(1);
+        assertThat(increasingPosition.value).isEqualTo(1)
     }
 }

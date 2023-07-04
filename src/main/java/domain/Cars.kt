@@ -1,59 +1,45 @@
-package domain;
+package domain
 
-import static message.ErrorMessage.WINNER_NOT_EXIST_ERROR_MESSAGE;
+import message.ErrorMessage.WINNER_NOT_EXIST_ERROR_MESSAGE
+import utils.NumberGenerator
+import java.util.*
+import java.util.stream.Collectors
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import utils.NumberGenerator;
+class Cars private constructor(private val value: MutableList<Car>) {
 
-public class Cars {
+    constructor() : this(ArrayList<Car>()) {}
 
-    private final List<Car> value;
-
-    private Cars(List<Car> value) {
-        this.value = value;
-    }
-
-    public Cars() {
-        this(new ArrayList<>());
-    }
-
-    public void move(NumberGenerator numberGenerator) {
-        for (Car car : value) {
-            car.move(numberGenerator);
+    fun move(numberGenerator: NumberGenerator) {
+        for (car in value) {
+            car.move(numberGenerator)
         }
     }
 
-    public Cars calculateWinner() {
-        Car winnerCar = value.stream()
-                .max(Comparator.comparingInt(Car::getPosition))
-                .orElseThrow(() -> new IllegalStateException(WINNER_NOT_EXIST_ERROR_MESSAGE.getValue()));
-        List<Car> winners = value.stream()
-                .filter(it -> it.hasSamePositionWith(winnerCar))
-                .collect(Collectors.toList());
-        return new Cars(winners);
+    fun calculateWinner(): Cars {
+        val winnerCar = value.stream()
+            .max(Comparator.comparingInt { obj: Car -> obj.position.value })
+            .orElseThrow { IllegalStateException(WINNER_NOT_EXIST_ERROR_MESSAGE.value) }
+        val winners = value.stream()
+            .filter { it: Car -> it.hasSamePositionWith(winnerCar) }
+            .collect(Collectors.toList())
+        return Cars(winners)
     }
 
-    public void add(Car car) {
-        value.add(car);
+    fun add(car: Car) {
+        value.add(car)
     }
 
-    public Map<String, Integer> getPositionPerCar() {
-        Map<String, Integer> positionPerCar = new HashMap<>();
-        for (Car car : value) {
-            positionPerCar.put(car.getName(), car.getPosition());
+    val positionPerCar: Map<String, Int>
+        get() {
+            val positionPerCar: MutableMap<String, Int> = HashMap()
+            for (car in value) {
+                positionPerCar[car.name.value] = car.position.value
+            }
+            return Collections.unmodifiableMap(positionPerCar)
         }
-        return Collections.unmodifiableMap(positionPerCar);
-    }
 
-    public List<String> getNames() {
-        return value.stream()
-                .map(Car::getName)
-                .collect(Collectors.toList());
-    }
+    val names: List<String>
+        get() = value.stream()
+            .map { obj: Car -> obj.name.value }
+            .collect(Collectors.toList())
 }

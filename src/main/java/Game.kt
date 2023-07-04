@@ -1,9 +1,10 @@
-import controller.RaceController;
+import controller.RaceController
 
-public class Game {
+object Game {
 
-    public static void main(String[] args) {
-        RaceController raceController = new RaceController();
-        raceController.start();
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val raceController = RaceController()
+        raceController.start()
     }
 }

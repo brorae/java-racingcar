@@ -3,12 +3,10 @@ package domain
 import message.ErrorMessage.TRY_COUNT_FORMAT_ERROR_MESSAGE
 import message.ErrorMessage.TRY_COUNT_NEGATIVE_ERROR_MESSAGE
 
-class TryCount private constructor(value: Int) {
-    private val value: Int
+class TryCount private constructor(private val value: Int) {
 
     init {
         validateNegative(value)
-        this.value = value
     }
 
     private fun validateNegative(value: Int) {

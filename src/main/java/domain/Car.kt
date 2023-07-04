@@ -1,40 +1,24 @@
-package domain;
+package domain
 
+import domain.Position.Companion.create
+import utils.NumberGenerator
 
-import utils.NumberGenerator;
+class Car private constructor(val name: Name, var position: Position) {
 
-public class Car {
+    constructor(name: String) : this(Name(name), create()) {}
 
-    public static final int MOVABLE_NUMBER_LOWER_BOUND = 4;
-
-    private final Name Name;
-    private Position position;
-
-    private Car(Name name, Position position) {
-        this.Name = name;
-        this.position = position;
-    }
-
-    public Car(String name) {
-        this(new Name(name), Position.create());
-    }
-
-    public void move(NumberGenerator numberGenerator) {
-        int number = numberGenerator.generate();
+    fun move(numberGenerator: NumberGenerator) {
+        val number = numberGenerator.generate()
         if (number >= MOVABLE_NUMBER_LOWER_BOUND) {
-            position = position.increase();
+            position = position.increase()
         }
     }
 
-    public boolean hasSamePositionWith(Car other) {
-        return position.equals(other.position);
+    fun hasSamePositionWith(other: Car): Boolean {
+        return position == other.position
     }
 
-    public String getName() {
-        return Name.getValue();
-    }
-
-    public int getPosition() {
-        return position.getValue();
+    companion object {
+        const val MOVABLE_NUMBER_LOWER_BOUND = 4
     }
 }

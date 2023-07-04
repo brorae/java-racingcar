@@ -1,50 +1,53 @@
-package controller;
+package controller
 
-import static message.ErrorMessage.GAME_ERROR_MESSAGE;
+import domain.Car
+import domain.Cars
+import domain.TryCount.Companion.from
+import message.ErrorMessage
+import utils.RandomNumberGenerator
+import view.InputView.inputCarNames
+import view.InputView.inputTryCount
+import view.OutputView.printMessage
+import view.OutputView.printRoundResult
+import view.OutputView.printWinner
+import java.io.IOException
 
-import domain.Car;
-import domain.Cars;
-import domain.TryCount;
-import java.io.IOException;
-import java.util.List;
-import utils.RandomNumberGenerator;
-import view.InputView;
-import view.OutputView;
+class RaceController {
 
-public class RaceController {
-
-    public void start() {
+    fun start() {
         try {
-            Cars cars = registerCars();
-            playGame(cars);
-            showWinners(cars);
-        } catch (IOException e) {
-            throw new IllegalStateException(GAME_ERROR_MESSAGE.getValue());
-        } catch (RuntimeException e) {
-            OutputView.printMessage(e.getMessage());
+            val cars = registerCars()
+            playGame(cars)
+            showWinners(cars)
+        } catch (e: IOException) {
+            throw IllegalStateException(ErrorMessage.GAME_ERROR_MESSAGE.value)
+        } catch (e: RuntimeException) {
+            printMessage(e.message!!)
         }
     }
 
-    private Cars registerCars() throws IOException {
-        List<String> carNames = InputView.inputCarNames();
-        Cars cars = new Cars();
-        for (String carName : carNames) {
-            cars.add(new Car(carName));
+    @Throws(IOException::class)
+    private fun registerCars(): Cars {
+        val carNames = inputCarNames()
+        val cars = Cars()
+        for (carName in carNames) {
+            cars.add(Car(carName))
         }
-        return cars;
+        return cars
     }
 
-    private void playGame(Cars cars) throws IOException {
-        TryCount count = TryCount.from(InputView.inputTryCount());
-        while (!count.isZero()) {
-            cars.move(new RandomNumberGenerator());
-            count = count.decrease();
-            OutputView.printRoundResult(cars.getPositionPerCar());
+    @Throws(IOException::class)
+    private fun playGame(cars: Cars) {
+        var count = from(inputTryCount())
+        while (!count.isZero) {
+            cars.move(RandomNumberGenerator())
+            count = count.decrease()
+            printRoundResult(cars.positionPerCar)
         }
     }
 
-    private void showWinners(Cars cars) {
-        Cars winners = cars.calculateWinner();
-        OutputView.printWinner(winners.getNames());
+    private fun showWinners(cars: Cars) {
+        val winners = cars.calculateWinner()
+        printWinner(winners.names)
     }
 }

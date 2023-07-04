@@ -1,50 +1,41 @@
-package domain;
+package domain
 
-import static message.ErrorMessage.POSITION_NEGATIVE_ERROR_MESSAGE;
+import message.ErrorMessage
+import java.util.*
 
-import java.util.Objects;
+class Position private constructor(val value: Int) {
 
-public class Position {
-
-    private final int value;
-
-    private Position(int value) {
-        validateNegative(value);
-        this.value = value;
+    init {
+        validateNegative(value)
     }
 
-    public static Position create() {
-        return new Position(0);
+    private fun validateNegative(value: Int) {
+        require(value >= 0) { ErrorMessage.POSITION_NEGATIVE_ERROR_MESSAGE.value }
     }
 
-    private void validateNegative(int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException(POSITION_NEGATIVE_ERROR_MESSAGE.getValue());
+    fun increase(): Position {
+        return Position(value + 1)
+    }
+
+    override fun equals(o: Any?): Boolean {
+        if (this === o) {
+            return true
         }
-    }
-
-    public Position increase() {
-        return new Position(value + 1);
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+        if (o == null || javaClass != o.javaClass) {
+            return false
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Position position = (Position) o;
-        return value == position.value;
+        val position = o as Position
+        return value == position.value
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
+    override fun hashCode(): Int {
+        return Objects.hash(value)
+    }
+
+    companion object {
+        @JvmStatic
+        fun create(): Position {
+            return Position(0)
+        }
     }
 }

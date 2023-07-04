@@ -1,25 +1,18 @@
-package domain;
+package domain
 
-import static message.ErrorMessage.CAR_NAME_LENGTH_ERROR_MESSAGE;
+import message.ErrorMessage
 
-public class Name {
+class Name(val value: String) {
 
-    public static final int MAX_NAME_LENGTH = 5;
-
-    private final String value;
-
-    public Name(String value) {
-        validateNullAndLength(value);
-        this.value = value;
+    init {
+        validateNullAndLength(value)
     }
 
-    private void validateNullAndLength(String value) {
-        if (value == null || value.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException(CAR_NAME_LENGTH_ERROR_MESSAGE.getValue());
-        }
+    private fun validateNullAndLength(value: String) {
+        require(value.length <= MAX_NAME_LENGTH) { ErrorMessage.CAR_NAME_LENGTH_ERROR_MESSAGE.value }
     }
 
-    public String getValue() {
-        return value;
+    companion object {
+        const val MAX_NAME_LENGTH = 5
     }
 }
