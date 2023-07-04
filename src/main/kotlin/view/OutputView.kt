@@ -2,7 +2,7 @@ package view
 
 import message.GameMessage.FINAL_RESULT_MESSAGE
 import message.GameMessage.GAME_RESULT_MESSAGE
-import java.lang.String.*
+import java.lang.String.join
 
 object OutputView {
 
