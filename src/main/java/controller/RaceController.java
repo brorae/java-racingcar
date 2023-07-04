@@ -13,7 +13,7 @@ import view.OutputView;
 
 public class RaceController {
 
-    public static void main(String[] args) {
+    public void start() {
         try {
             Cars cars = registerCars();
             playGame(cars);
@@ -25,7 +25,7 @@ public class RaceController {
         }
     }
 
-    private static Cars registerCars() throws IOException {
+    private Cars registerCars() throws IOException {
         List<String> carNames = InputView.inputCarNames();
         Cars cars = new Cars();
         for (String carName : carNames) {
@@ -34,7 +34,7 @@ public class RaceController {
         return cars;
     }
 
-    private static void playGame(Cars cars) throws IOException {
+    private void playGame(Cars cars) throws IOException {
         TryCount count = TryCount.from(InputView.inputTryCount());
         while (!count.isZero()) {
             cars.move(new RandomNumberGenerator());
@@ -43,7 +43,7 @@ public class RaceController {
         }
     }
 
-    private static void showWinners(Cars cars) {
+    private void showWinners(Cars cars) {
         Cars winners = cars.calculateWinner();
         OutputView.printWinner(winners.getNames());
     }
