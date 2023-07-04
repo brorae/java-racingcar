@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-    public static final String CAR_NAME_DELIMITER = ",";
+    private static final String CAR_NAME_DELIMITER = ",";
 
     private InputView() {
 

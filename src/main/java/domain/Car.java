@@ -5,7 +5,7 @@ import utils.NumberGenerator;
 
 public class Car {
 
-    public static final int MOVABLE_NUMBER_LOWER_BOUND = 4;
+    private static final int MOVABLE_NUMBER_LOWER_BOUND = 4;
 
     private final Name Name;
     private Position position;

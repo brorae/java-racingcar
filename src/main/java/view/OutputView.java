@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static final String WINNER_DELIMITER = ",";
-    public static final String CAR_SEPARATOR = " : ";
-    public static final String CAR_POSITION_CHARACTER = "-";
+    private static final String WINNER_DELIMITER = ",";
+    private static final String CAR_SEPARATOR = " : ";
+    private static final String CAR_POSITION_CHARACTER = "-";
 
     private OutputView() {
 
